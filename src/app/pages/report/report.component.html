@@ -1,0 +1,41 @@
+<div class="col-md-12">
+    <mat-card>
+        <form class="example-form" (ngSubmit)="onSubmit()">
+
+            <table class="example-full-width" cellspacing="0">
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>From</mat-label>
+                            <input matInput [matDatepicker]="frompicker">
+                            <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                            <mat-datepicker #frompicker></mat-datepicker>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Until</mat-label>
+                            <input matInput [matDatepicker]="untilpicker">
+                            <mat-datepicker-toggle matSuffix [for]="untilpicker"></mat-datepicker-toggle>
+                            <mat-datepicker #untilpicker></mat-datepicker>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+
+            <p>
+                <mat-form-field class="w-100">
+                    <mat-label>Category</mat-label>
+                    <mat-select>
+                        <mat-option value="" disabled>Choose</mat-option>
+                        <mat-option *ngFor="let catItem of catItems" value="{{catItem.category_name}}">{{catItem.category_name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </p>
+
+            <div class="clearfix">
+                <button class="float-right" mat-raised-button color="primary">Generate Report</button>
+            </div>
+        </form>
+    </mat-card>
+</div>

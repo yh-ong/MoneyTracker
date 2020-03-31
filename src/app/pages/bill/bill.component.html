@@ -1,0 +1,88 @@
+<ng-template #mytemplate>
+  <form [formGroup]="billForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="w-100">
+      <mat-label>Invoice No</mat-label>
+      <input matInput formControlName="invoiceNo" placeholder="Ex. 120.00" autocomplete="off">
+      <mat-error *ngIf="invoiceNo.hasError('invoiceNo') && !invoiceNo.hasError('required')">
+        Please enter a valid amount
+      </mat-error>
+      <mat-error *ngIf="invoiceNo.hasError('required')">
+        Amount is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Choose a date</mat-label>
+      <input matInput formControlName="invoiceDate" [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="invoiceDate.hasError('invoiceDate') && !invoiceDate.hasError('required')">
+        Please select a valid dates
+      </mat-error>
+      <mat-error *ngIf="invoiceDate.hasError('required')">
+        Dates is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="billCategory">
+        <mat-option value="" disabled>Choose</mat-option>
+        <mat-option *ngFor="let catItem of catItems" value="{{catItem.category_name}}">{{catItem.category_name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="billCategory.hasError('billCategory') && !billCategory.hasError('required')">
+        Please enter a valid category
+      </mat-error>
+      <mat-error *ngIf="billCategory.hasError('required')">
+        Category is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+        
+    <mat-form-field class="w-100">
+      <mat-label>Amount</mat-label>
+      <input matInput formControlName="amount" placeholder="Ex. 120.00" autocomplete="off">
+      <mat-error *ngIf="amount.hasError('amount') && !amount.hasError('required')">
+        Please enter a valid amount
+      </mat-error>
+      <mat-error *ngIf="amount.hasError('required')">
+        Amount is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+      <div class="d-flex flex-row-reverse">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!billForm.valid">Save</button>
+      </div>
+  </form>
+</ng-template>
+
+<button mat-raised-button color="primary" (click)="openDialog(mytemplate)">Add Bills & Payments</button>
+
+<mat-card class="mt-3">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="no">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Invoice No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.invoice_no}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+          <th mat-header-cell mat-sort-header *matHeaderCellDef> Invoice Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.invoice_date}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="name">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Category </th>
+        <td mat-cell *matCellDef="let element"> {{element.bill_category}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Amount </th>
+        <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</mat-card>

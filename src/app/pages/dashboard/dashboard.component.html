@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-md-6">
+        <mat-card>
+            <mat-card-title>Account</mat-card-title>
+            <div class="clearfix align-item">
+                <h6>Income</h6>
+                <p>{{incomeTotalAmount}}</p>
+            </div>
+            <div class="clearfix align-item">
+                <h6>Expense & Bills</h6>
+                <p>{{expenseTotalAmount + billTotalAmount}}</p>
+            </div>
+            <hr>
+            <div class="clearfix align-item">
+                <h6>Balance</h6>
+                <p>{{incomeTotalAmount - (expenseTotalAmount + billTotalAmount)}}</p>
+            </div>
+        </mat-card>
+    </div>
+    
+    <div class="col-md-6">
+        <mat-card>
+            <mat-card-title>Debt</mat-card-title>
+            <div class="clearfix align-item">
+                <h6>Debt</h6>
+                <p>{{debtTotalAmount}}</p>
+            </div>
+            <div class="clearfix align-item">
+                <h6>Paid</h6>
+                <p>{{incomeTotalAmount}}</p>
+            </div>
+            <hr>
+            <div class="clearfix align-item">
+                <h6>Total</h6>
+                <p>{{debtTotalAmount - expenseTotalAmount}}</p>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-6">
+        <mat-card>
+            <mat-card-title>Recent Activity</mat-card-title>
+            <div class="chart-wrapper">
+                <canvas baseChart 
+                    [datasets]="lineChartData" 
+                    [labels]="lineChartLabels" 
+                    [options]="lineChartOptions"
+                    [colors]="lineChartColors" 
+                    [legend]="lineChartLegend" 
+                    [chartType]="lineChartType" 
+                    [plugins]="lineChartPlugins">
+                </canvas>
+            </div>
+        </mat-card>
+    </div>
+
+    <div class="col-md-6">
+        <mat-card>
+            <mat-card-title>Who Own You</mat-card-title>
+        </mat-card>
+    </div>
+</div>

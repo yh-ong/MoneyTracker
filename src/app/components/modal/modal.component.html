@@ -1,0 +1,44 @@
+<div id="modal-content-wrapper">
+    <!-- <header id="modal-header">
+        <h1 id="modal-title">Are you sure you want to logout?</h1>
+    </header>
+    <section id="modal-body">
+        <p>If you logout bad things might happen, but don't mind me, I'm just the description in a modal...</p>
+    </section>
+    <footer id="modal-footer">
+        <button mat-raised-button id="modal-action-button">Logout</button>
+        <button mat-raised-button id="modal-cancel-button" (click)="closeModal()">Go back</button>
+    </footer> -->
+    <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="w-100">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category">
+            <mat-option value="" disabled>Choose</mat-option>
+            <mat-option *ngFor="let catItem of catItems" value="{{catItem.category_name}}">{{catItem.category_name}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="category.hasError('category') && !category.hasError('required')">
+            Please enter a valid category
+          </mat-error>
+          <mat-error *ngIf="category.hasError('required')">
+            Category is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <mat-label>Amount</mat-label>
+          <input matInput formControlName="amount" placeholder="Ex. 120.00" autocomplete="off">
+          <mat-error *ngIf="amount.hasError('amount') && !amount.hasError('required')">
+            Please enter a valid amount
+          </mat-error>
+          <mat-error *ngIf="amount.hasError('required')">
+            Amount is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <mat-label>Remark</mat-label>
+          <textarea matInput formControlName="remark" placeholder="Ex. write any comments" autocomplete="off"></textarea>
+        </mat-form-field>
+        <div class="d-flex flex-row-reverse">
+          <button type="submit" mat-raised-button color="primary" [disabled]="!expenseForm.valid">Save</button>
+        </div>
+  </form>
+</div>
