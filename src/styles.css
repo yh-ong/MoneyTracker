@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+html, body { 
+    height: 100%;
+    background-color: #F0F4F6 !important;
+}
+body { 
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+.card {
+    box-shadow: 0 2px 40px rgba(142,156,170,0.2) !important;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-card-title {
+    font-size: 1.15rem;
+    margin-bottom: 1.2rem !important;
+}

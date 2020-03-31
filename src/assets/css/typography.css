@@ -1,0 +1,8 @@
+@font-face {
+    font-family: CircularStd;
+    src: url(../fonts/CircularStd-Medium.ttf);
+}
+
+body {
+    font-family: CircularStd;
+}
